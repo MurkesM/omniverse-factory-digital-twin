@@ -7,8 +7,8 @@
                 double radius = 500
             }
             dictionary Perspective = {
-                double3 position = (1699.8932026906873, 2149.162449689762, 1989.0929041584272)
-                double3 target = (-0.00000609312996857625, -0.000040359748254559236, 0.00004881486847807537)
+                double3 position = (2297.4052374695775, 2904.592523687581, 2688.258541869749)
+                double3 target = (-26.179446003446174, -0.000040359748709306587, 22.59562293932322)
             }
             dictionary Right = {
                 double3 position = (-50000, 0, 0)
@@ -21,6 +21,7 @@
             string boundCamera = "/OmniverseKit_Persp"
         }
         dictionary omni_layer = {
+            string authoring_layer = "./Environment.usda"
             dictionary locked = {
             }
             dictionary muteness = {
@@ -39,7 +40,9 @@
 
 def Xform "World"
 {
-    def Mesh "Ground"
+    def Mesh "Ground" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "PhysxTriangleMeshCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
     {
         float3[] extent = [(-50, 0, -50), (50, 0, 50)]
         int[] faceVertexCounts = [4]
@@ -47,6 +50,8 @@ def Xform "World"
         normal3f[] normals = [(0, 1, 0), (0, 1, 0), (0, 1, 0), (0, 1, 0)] (
             interpolation = "faceVarying"
         )
+        uniform token physics:approximation = "none"
+        bool physics:collisionEnabled = 1
         point3f[] points = [(-50, 0, -50), (50, 0, -50), (-50, 0, 50), (50, 0, 50)]
         texCoord2f[] primvars:st = [(0, 1), (0, 0), (1, 0), (1, 1)] (
             interpolation = "faceVarying"
@@ -54,7 +59,7 @@ def Xform "World"
         uniform token subdivisionScheme = "none"
         double3 xformOp:rotateXYZ = (0, 0, 0)
         double3 xformOp:scale = (15, 15, 15)
-        double3 xformOp:translate = (0, 0, 0)
+        double3 xformOp:translate = (-159.61826142953853, 0, 0)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
     }
 }
@@ -131,7 +136,7 @@ def "Render" (
                 bool omni:rtx:scene:hydra:mdlMaterialWarmup = 1
                 rel orderedVars = </Render/Vars/LdrColor>
                 custom bool overrideClipRange = 0
-                uniform int2 resolution = (1285, 653)
+                uniform int2 resolution = (1084, 653)
             }
         }
     }
@@ -178,10 +183,10 @@ over "OmniverseKit_Persp" (
     float exposure:time = 0.02
     float focalLength = 18.147562
     float focusDistance = 400
-    custom uniform vector3d omni:kit:centerOfInterest = (0, 0, -3386.0045358924053)
-    float3 xformOp:rotateXYZ = (-39.39917, 40.51744, -3.7654145e-14)
+    custom uniform vector3d omni:kit:centerOfInterest = (0, 0, -4576.184277512232)
+    float3 xformOp:rotateXYZ = (-39.39917, 41.077763, -2.320592e-14)
     float3 xformOp:scale = (1, 1, 1)
-    double3 xformOp:translate = (1699.8932026906873, 2149.162449689762, 1989.0929041584272)
+    double3 xformOp:translate = (2297.4052374695775, 2904.592523687581, 2688.258541869749)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
 }
 

@@ -41,11 +41,16 @@
 
 def Xform "World"
 {
-    def Capsule "Robot"
+    def Capsule "Robot" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysxRigidBodyAPI", "PhysicsCollisionAPI", "PhysxCollisionAPI"]
+    )
     {
         uniform token axis = "Y"
         float3[] extent = [(-25, -50, -25), (25, 50, 25)]
         double height = 50
+        bool physics:collisionEnabled = 1
+        bool physics:kinematicEnabled = 0
+        bool physics:rigidBodyEnabled = 1
         double radius = 25
         custom bool refinementEnableOverride = 1
         custom int refinementLevel = 2
@@ -128,7 +133,7 @@ def "Render" (
                 bool omni:rtx:scene:hydra:mdlMaterialWarmup = 1
                 rel orderedVars = </Render/Vars/LdrColor>
                 custom bool overrideClipRange = 0
-                uniform int2 resolution = (1285, 653)
+                uniform int2 resolution = (1084, 653)
             }
         }
     }

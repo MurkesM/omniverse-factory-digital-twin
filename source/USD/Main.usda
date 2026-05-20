@@ -7,8 +7,8 @@
                 double radius = 500
             }
             dictionary Perspective = {
-                double3 position = (531.5048133376742, 317.2959359793852, -2374.8315057573627)
-                double3 target = (193.1276585588102, -190.63512522696618, -113.22844819987631)
+                double3 position = (-460.57649278015987, 1601.4216255478104, -1509.159538393284)
+                double3 target = (12.580373525666289, 92.07381283805626, 905.3768824863191)
             }
             dictionary Right = {
                 double3 position = (-50000, 0, 0)
@@ -45,6 +45,29 @@
 
 def Xform "World"
 {
+    over "Ground"
+    {
+        double3 xformOp:rotateXYZ = (0, 0, 0)
+        double3 xformOp:scale = (15, 15, 15)
+        double3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+    }
+
+    over "Conveyor"
+    {
+        double3 xformOp:rotateXYZ = (0, 0, 0)
+        double3 xformOp:scale = (4.600788063708513, 1, 1)
+        double3 xformOp:translate = (-378.42645829137143, 50, 70.34017594098964)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+    }
+
+    over "Robot"
+    {
+        double3 xformOp:rotateXYZ = (0, 0, 0)
+        double3 xformOp:scale = (1, 1, 1)
+        double3 xformOp:translate = (14, 254.14436467460766, 80.8380611004913)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+    }
 }
 
 def Xform "Environment"
@@ -119,7 +142,7 @@ def "Render" (
                 bool omni:rtx:scene:hydra:mdlMaterialWarmup = 1
                 rel orderedVars = </Render/Vars/LdrColor>
                 custom bool overrideClipRange = 0
-                uniform int2 resolution = (1285, 653)
+                uniform int2 resolution = (1084, 653)
             }
         }
     }
@@ -166,10 +189,10 @@ over "OmniverseKit_Persp" (
     float exposure:time = 0.02
     float focalLength = 18.147562
     float focusDistance = 400
-    custom uniform vector3d omni:kit:centerOfInterest = (0, 0, -2342.5075137057343)
-    float3 xformOp:rotateXYZ = (167.47696, 8.509375, 180)
+    custom uniform vector3d omni:kit:centerOfInterest = (0, 0, -2886.5194209667357)
+    float3 xformOp:rotateXYZ = (148.47333, -11.087287, -180)
     float3 xformOp:scale = (1, 1, 1)
-    double3 xformOp:translate = (531.5048133376742, 317.2959359793852, -2374.8315057573627)
+    double3 xformOp:translate = (-460.57649278015987, 1601.4216255478104, -1509.159538393284)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
 }
 
