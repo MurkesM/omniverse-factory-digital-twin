@@ -7,8 +7,8 @@
                 double radius = 500
             }
             dictionary Perspective = {
-                double3 position = (620.2658883183573, 49.68485616279588, 602.3301659592896)
-                double3 target = (0.00002461243389006995, 0.00001904099522676006, -0.000038564213696190563)
+                double3 position = (78.27245619330589, 35.246503406461954, 405.5111834234781)
+                double3 target = (70.68843770224186, 141.40504238246143, 35.53593215908694)
             }
             dictionary Right = {
                 double3 position = (-50000, 0, 0)
@@ -19,6 +19,17 @@
                 double radius = 500
             }
             string boundCamera = "/OmniverseKit_Persp"
+        }
+        dictionary metricsAssembler = {
+            dictionary "/World/BlueBeamB_04" = {
+            }
+            dictionary "/World/KukaArm1" = {
+            }
+            dictionary "/World/Robot_Arm_Adjust" = {
+            }
+            dictionary "/World/Robot_Arm_Export" = {
+            }
+            int version = 1
         }
         dictionary omni_layer = {
             string authoring_layer = "./Robot.usda"
@@ -41,23 +52,39 @@
 
 def Xform "World"
 {
-    def Capsule "Robot" (
-        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysxRigidBodyAPI", "PhysicsCollisionAPI", "PhysxCollisionAPI"]
+    def Mesh "Temp_Floor" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "PhysxTriangleMeshCollisionAPI", "PhysicsMeshCollisionAPI"]
     )
     {
-        uniform token axis = "Y"
-        float3[] extent = [(-25, -50, -25), (25, 50, 25)]
-        double height = 50
+        float3[] extent = [(-50, 0, -50), (50, 0, 50)]
+        int[] faceVertexCounts = [4]
+        int[] faceVertexIndices = [0, 2, 3, 1]
+        normal3f[] normals = [(0, 1, 0), (0, 1, 0), (0, 1, 0), (0, 1, 0)] (
+            interpolation = "faceVarying"
+        )
+        uniform token physics:approximation = "none"
         bool physics:collisionEnabled = 1
-        bool physics:kinematicEnabled = 0
-        bool physics:rigidBodyEnabled = 1
-        double radius = 25
-        custom bool refinementEnableOverride = 1
-        custom int refinementLevel = 2
+        point3f[] points = [(-50, 0, -50), (50, 0, -50), (-50, 0, 50), (50, 0, 50)]
+        texCoord2f[] primvars:st = [(0, 1), (0, 0), (1, 0), (1, 1)] (
+            interpolation = "faceVarying"
+        )
+        uniform token subdivisionScheme = "none"
+        token visibility = "inherited"
         double3 xformOp:rotateXYZ = (0, 0, 0)
-        double3 xformOp:scale = (1, 1, 1)
-        double3 xformOp:translate = (0, 51.41775082899523, 0)
+        double3 xformOp:scale = (6.619999999999925, 6.619999999999925, 6.619999999999925)
+        double3 xformOp:translate = (0, 0, 0)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+    }
+
+    def "Robot_Arm_Adjust" (
+        prepend payload = @../Factory/Factory/SubUSDs/Robot_Arm_Adjust.usd@
+    )
+    {
+        double xformOp:rotateX:unitsResolve = -90
+        float3 xformOp:rotateXYZ = (0, 0, 0)
+        float3 xformOp:scale = (1, 1, 1)
+        double3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale", "xformOp:rotateX:unitsResolve"]
     }
 }
 
@@ -133,7 +160,7 @@ def "Render" (
                 bool omni:rtx:scene:hydra:mdlMaterialWarmup = 1
                 rel orderedVars = </Render/Vars/LdrColor>
                 custom bool overrideClipRange = 0
-                uniform int2 resolution = (1084, 653)
+                uniform int2 resolution = (726, 653)
             }
         }
     }
@@ -180,10 +207,10 @@ over "OmniverseKit_Persp" (
     float exposure:time = 0.02
     float focalLength = 18.147562
     float focusDistance = 400
-    custom uniform vector3d omni:kit:centerOfInterest = (0, 0, -866.0254037844387)
-    float3 xformOp:rotateXYZ = (-3.2889283, 45.840477, 1.1413609e-14)
+    custom uniform vector3d omni:kit:centerOfInterest = (0, 0, -384.9790114826274)
+    float3 xformOp:rotateXYZ = (16.006804, 1.1743256, 3.777702e-15)
     float3 xformOp:scale = (1, 1, 1)
-    double3 xformOp:translate = (620.2658883183573, 49.68485616279588, 602.3301659592896)
+    double3 xformOp:translate = (78.27245619330589, 35.246503406461954, 405.5111834234781)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
 }
 
